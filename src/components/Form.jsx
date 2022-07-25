@@ -41,8 +41,8 @@ class Form extends React.Component {
             Raridade
             <select data-testid="rare-input" id="rarity" name="rarity">
               <option name="rarity" id="normal" value="normal">Normal</option>
-              <option name="rarity" id="rare" value="rare">Raro</option>
-              <option name="rarity" id="ultrarare" value="ultrarare">Muito raro</option>
+              <option name="rarity" id="rare" value="raro">Raro</option>
+              <option name="rarity" id="ultrarare" value="muito raro">Muito raro</option>
             </select>
           </label>
         </div>
