@@ -24,7 +24,7 @@ class Form extends React.Component {
       onSaveButtonClick,
     } = this.props;
     return (
-      <form onSubmit="handleSubmit" className="form-container">
+      <form className="form-container">
         <Name cardName={ cardName } onInputChange={ onInputChange } />
         <Description
           cardDescription={ cardDescription }
