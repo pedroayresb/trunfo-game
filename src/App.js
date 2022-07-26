@@ -8,6 +8,7 @@ class App extends React.Component {
     super();
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.carDel = this.carDel.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -70,14 +71,25 @@ class App extends React.Component {
       cardTrunfo: '',
     });
     const finded = arrayOfCards.find((card) => card.cardTrunfo === 'on');
-    console.log(finded);
     if (finded !== undefined) {
       this.setState({ hasTrunfo: true });
     }
   }
 
+  carDel(event) {
+    const { arrayOfCards } = this.state;
+    const { id } = event.target.parentNode;
+    arrayOfCards.splice(id, 1);
+    const finded = arrayOfCards.find((card) => card.cardTrunfo === 'on');
+    if (finded === undefined) {
+      this.setState({ hasTrunfo: false });
+    }
+    console.log(this.state);
+  }
+
   render() {
     const { arrayOfCards } = this.state;
+    const cardStack = true;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -90,7 +102,13 @@ class App extends React.Component {
           <Card { ...this.state } />
         </div>
         <div className="saved-cards">
-          {arrayOfCards.map((card, i) => <Card { ...card } key={ i } />)}
+          {arrayOfCards.map((card, i) => (<Card
+            { ...card }
+            key={ i }
+            id={ i }
+            cardStack={ cardStack }
+            carDel={ this.carDel }
+          />))}
         </div>
       </div>
     );
