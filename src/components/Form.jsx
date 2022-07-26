@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Name from './Name';
+import Description from './Description';
+import Attributes from './Attributes';
+import Image from './Image';
+import Rarity from './Rarity';
+import Super from './Super';
 
 class Form extends React.Component {
   render() {
@@ -18,103 +24,22 @@ class Form extends React.Component {
       onSaveButtonClick,
     } = this.props;
     return (
-      <section className="form-container">
-        <div className="name-container">
-          <label htmlFor="name">
-            Nome
-            <input
-              type="text"
-              data-testid="name-input"
-              id="name"
-              value={ cardName }
-              onChange={ onInputChange }
-            />
-          </label>
-        </div>
-        <div className="description-container">
-          <label htmlFor="description">
-            Descrição
-            <input
-              type="textarea"
-              data-testid="description-input"
-              id="description"
-              value={ cardDescription }
-              onChange={ onInputChange }
-            />
-          </label>
-        </div>
-        <div className="atributes-container">
-          <label htmlFor="attributes1">
-            Attr01
-            <input
-              type="number"
-              data-testid="attr1-input"
-              id="attributes1"
-              value={ cardAttr1 }
-              onChange={ onInputChange }
-            />
-          </label>
-          <label htmlFor="attributes2">
-            Attr02
-            <input
-              type="number"
-              data-testid="attr2-input"
-              id="attributes2"
-              value={ cardAttr2 }
-              onChange={ onInputChange }
-            />
-          </label>
-          <label htmlFor="attributes3">
-            Attr03
-            <input
-              type="number"
-              data-testid="attr3-input"
-              id="attributes3"
-              value={ cardAttr3 }
-              onChange={ onInputChange }
-            />
-          </label>
-        </div>
-        <div className="image-container">
-          <label htmlFor="card-img">
-            Image
-            <input
-              type="text"
-              data-testid="image-input"
-              id="card-img"
-              value={ cardImage }
-              onChange={ onInputChange }
-            />
-          </label>
-        </div>
-        <div className="rarity-container">
-          <label htmlFor="rarity">
-            Raridade
-            <select
-              data-testid="rare-input"
-              id="rarity"
-              name="rarity"
-              value={ cardRare }
-              onChange={ onInputChange }
-            >
-              <option name="rarity" id="normal" value="normal">Normal</option>
-              <option name="rarity" id="rare" value="raro">Raro</option>
-              <option name="rarity" id="ultrarare" value="muito raro">Muito raro</option>
-            </select>
-          </label>
-        </div>
-        <div className="checkbox-container">
-          <label htmlFor="trunfo-check">
-            Super Trybe Trunfo
-            <input
-              type="checkbox"
-              data-testid="trunfo-input"
-              id="trunfo-check"
-              checked={ cardTrunfo }
-              onChange={ onInputChange }
-            />
-          </label>
-        </div>
+      <form onSubmit="handleSubmit" className="form-container">
+        <Name cardName={ cardName } onInputChange={ onInputChange } />
+        <Description
+          cardDescription={ cardDescription }
+          onInputChange={ onInputChange }
+        />
+        <Attributes
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          onInputChange={ onInputChange }
+        />
+        <Image cardImage={ cardImage } onInputChange={ onInputChange } />
+        <Rarity cardRare={ cardRare } onInputChange={ onInputChange } />
+        <Super cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />
+        <h1>{hasTrunfo}</h1>
         <button
           type="submit"
           data-testid="save-button"
@@ -123,7 +48,7 @@ class Form extends React.Component {
         >
           Salvar
         </button>
-      </section>
+      </form>
     );
   }
 }
