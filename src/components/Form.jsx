@@ -23,6 +23,7 @@ class Form extends React.Component {
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+    const hsTrunfo = hasTrunfo !== true;
     return (
       <form className="form-container">
         <Name cardName={ cardName } onInputChange={ onInputChange } />
@@ -38,8 +39,8 @@ class Form extends React.Component {
         />
         <Image cardImage={ cardImage } onInputChange={ onInputChange } />
         <Rarity cardRare={ cardRare } onInputChange={ onInputChange } />
-        <Super cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />
-        <h1>{hasTrunfo}</h1>
+        {hsTrunfo && <Super cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />}
+        {hasTrunfo && <h1>Você já tem um Super Trunfo em seu baralho</h1>}
         <button
           type="submit"
           data-testid="save-button"

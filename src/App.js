@@ -16,8 +16,8 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: false,
-      hasTrunfo: '',
+      cardTrunfo: '',
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
       arrayOfCards: [],
     };
@@ -67,9 +67,13 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: false,
-      hasTrunfo: '',
+      cardTrunfo: '',
     });
+    const finded = arrayOfCards.find((card) => card.cardTrunfo === 'on');
+    console.log(finded);
+    if (finded !== undefined) {
+      this.setState({ hasTrunfo: true });
+    }
   }
 
   render() {

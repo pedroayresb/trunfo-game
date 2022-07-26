@@ -38,3 +38,9 @@ code {
   text-align: center;
   border: 3px solid green;
 }
+
+.saved-cards {
+  display: flex;
+  flex-direction: row;
+  
+}
