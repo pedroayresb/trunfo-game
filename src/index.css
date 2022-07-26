@@ -18,5 +18,23 @@ code {
 }
 
 .container {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
   display: flex;
+  justify-content: space-evenly;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 3px solid green;
 }

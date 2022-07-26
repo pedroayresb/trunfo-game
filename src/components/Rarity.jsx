@@ -15,7 +15,7 @@ class Rarity extends React.Component {
             value={ cardRare }
             onChange={ onInputChange }
           >
-            <option name="rarity" id="normal" value="normal">Normal</option>
+            <option name="rarity" id="normal" value="normal" selected>Normal</option>
             <option name="rarity" id="rare" value="raro">Raro</option>
             <option name="rarity" id="ultrarare" value="muito raro">Muito raro</option>
           </select>
