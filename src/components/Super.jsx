@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 class Super extends React.Component {
   render() {
-    const { cardTrunfo, onInputChange } = this.props;
+    const { cardTrunfo, onInputChange, datatestid } = this.props;
     return (
       <div className="checkbox-container">
         <label htmlFor="trunfo-check">
           Super Trybe Trunfo
           <input
             type="checkbox"
-            data-testid="trunfo-input"
             id="cardTrunfo"
+            data-testid={ datatestid }
             checked={ cardTrunfo }
             onChange={ onInputChange }
           />
@@ -24,6 +24,7 @@ class Super extends React.Component {
 Super.propTypes = {
   cardTrunfo: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
+  datatestid: PropTypes.string.isRequired,
 };
 
 export default Super;

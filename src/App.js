@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Filter from './components/Filter';
 import './index.css';
 
 class App extends React.Component {
@@ -9,6 +10,8 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.carDel = this.carDel.bind(this);
+    this.filterCardsByName = this.filterCardsByName.bind(this);
+    this.filterCardsByRarity = this.filterCardsByRarity.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -17,10 +20,10 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: '',
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       arrayOfCards: [],
+      filter: [],
     };
   }
 
@@ -84,12 +87,69 @@ class App extends React.Component {
     if (finded === undefined) {
       this.setState({ hasTrunfo: false });
     }
-    console.log(this.state);
+  }
+
+  filterCardsByName(event) {
+    const {
+      arrayOfCards,
+    } = this.state;
+    const { id, value } = event.target;
+    const filtered = [];
+    console.log(value);
+    arrayOfCards.forEach((card) => {
+      if (card[id].includes(value)) {
+        filtered.push(card);
+      }
+    });
+    if (value.length > 0 && filtered.length === 0) {
+      filtered.push({ cardName: 'Carta não encontrada' });
+    }
+    this.setState({ filter: filtered });
+  }
+
+  filterCardsByRarity(event) {
+    const {
+      arrayOfCards,
+    } = this.state;
+    const { id, value } = event.target;
+    const filtered = [];
+    console.log(value);
+    if (value === 'todas') {
+      filtered.push(...arrayOfCards);
+    } else {
+      arrayOfCards.forEach((card) => {
+        if (card[id] === value) {
+          filtered.push(card);
+        }
+      });
+      if (value.length > 0 && filtered.length === 0) {
+        filtered.push({ cardName: 'Carta não encontrada' });
+      }
+    }
+    this.setState({ filter: filtered });
   }
 
   render() {
-    const { arrayOfCards } = this.state;
+    const { arrayOfCards, filter } = this.state;
     const cardStack = true;
+    let savedCards;
+    if (filter.length > 0) {
+      savedCards = filter.map((card, i) => (<Card
+        { ...card }
+        id={ i }
+        key={ i }
+        cardStack={ cardStack }
+        carDel={ this.carDel }
+      />));
+    } else {
+      savedCards = arrayOfCards.map((card, i) => (<Card
+        { ...card }
+        key={ i }
+        id={ i }
+        cardStack={ cardStack }
+        carDel={ this.carDel }
+      />));
+    }
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -102,13 +162,11 @@ class App extends React.Component {
           <Card { ...this.state } />
         </div>
         <div className="saved-cards">
-          {arrayOfCards.map((card, i) => (<Card
-            { ...card }
-            key={ i }
-            id={ i }
-            cardStack={ cardStack }
-            carDel={ this.carDel }
-          />))}
+          <Filter
+            onNameInputChange={ this.filterCardsByName }
+            onRarityInputChange={ this.filterCardsByRarity }
+          />
+          {savedCards}
         </div>
       </div>
     );

@@ -26,7 +26,11 @@ class Form extends React.Component {
     const hsTrunfo = hasTrunfo !== true;
     return (
       <form className="form-container">
-        <Name cardName={ cardName } onInputChange={ onInputChange } />
+        <Name
+          cardName={ cardName }
+          onInputChange={ onInputChange }
+          datatestid="name-input"
+        />
         <Description
           cardDescription={ cardDescription }
           onInputChange={ onInputChange }
@@ -38,8 +42,16 @@ class Form extends React.Component {
           onInputChange={ onInputChange }
         />
         <Image cardImage={ cardImage } onInputChange={ onInputChange } />
-        <Rarity cardRare={ cardRare } onInputChange={ onInputChange } />
-        {hsTrunfo && <Super cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />}
+        <Rarity
+          cardRare={ cardRare }
+          onInputChange={ onInputChange }
+          datatestid="rare-input"
+        />
+        {hsTrunfo && <Super
+          cardTrunfo={ cardTrunfo }
+          onInputChange={ onInputChange }
+          datatestid="trunfo-input"
+        />}
         {hasTrunfo && <h1>Você já tem um Super Trunfo em seu baralho</h1>}
         <button
           type="submit"

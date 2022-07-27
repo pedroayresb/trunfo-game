@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 class Rarity extends React.Component {
   render() {
-    const { cardRare, onInputChange } = this.props;
+    const { cardRare, onInputChange, datatestid } = this.props;
     return (
       <div className="rarity-container">
         <label htmlFor="rarity">
           Raridade
           <select
-            data-testid="rare-input"
             id="cardRare"
             name="rarity"
+            data-testid={ datatestid }
             value={ cardRare }
             onChange={ onInputChange }
           >
@@ -28,6 +28,7 @@ class Rarity extends React.Component {
 Rarity.propTypes = {
   cardRare: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
+  datatestid: PropTypes.string.isRequired,
 };
 
 export default Rarity;
