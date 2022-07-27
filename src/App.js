@@ -12,6 +12,7 @@ class App extends React.Component {
     this.carDel = this.carDel.bind(this);
     this.filterCardsByName = this.filterCardsByName.bind(this);
     this.filterCardsByRarity = this.filterCardsByRarity.bind(this);
+    this.filterCardsByTrunformation = this.filterCardsByTrunformation.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -102,7 +103,7 @@ class App extends React.Component {
       }
     });
     if (value.length > 0 && filtered.length === 0) {
-      filtered.push({ cardName: 'Carta não encontrada' });
+      filtered.push({ cardName: 'Você não tem cartas com esse nome' });
     }
     this.setState({ filter: filtered });
   }
@@ -113,7 +114,6 @@ class App extends React.Component {
     } = this.state;
     const { id, value } = event.target;
     const filtered = [];
-    console.log(value);
     if (value === 'todas') {
       filtered.push(...arrayOfCards);
     } else {
@@ -123,14 +123,36 @@ class App extends React.Component {
         }
       });
       if (value.length > 0 && filtered.length === 0) {
-        filtered.push({ cardName: 'Carta não encontrada' });
+        filtered.push({ cardName: 'Vocẽ não tem cartas com essa raridade' });
       }
     }
     this.setState({ filter: filtered });
   }
 
+  filterCardsByTrunformation(event) {
+    const {
+      arrayOfCards,
+    } = this.state;
+    const filtered = [];
+    if (event.target.checked) {
+      arrayOfCards.forEach((card) => {
+        if (card[event.target.id] === event.target.value) {
+          filtered.push(card);
+        }
+      });
+      this.setState({ filterTrunfoIsChecked: true }, () => console.log(this.state));
+    } else {
+      filtered.push(...arrayOfCards);
+      this.setState({ filterTrunfoIsChecked: false }, () => console.log(this.state));
+    }
+    if (filtered.length === 0) {
+      filtered.push({ cardName: 'Você não tem SuperTrunfos' });
+    }
+    this.setState({ filter: filtered });
+  }
+
   render() {
-    const { arrayOfCards, filter } = this.state;
+    const { arrayOfCards, filter, filterTrunfoIsChecked } = this.state;
     const cardStack = true;
     let savedCards;
     if (filter.length > 0) {
@@ -165,6 +187,8 @@ class App extends React.Component {
           <Filter
             onNameInputChange={ this.filterCardsByName }
             onRarityInputChange={ this.filterCardsByRarity }
+            onSuperChange={ this.filterCardsByTrunformation }
+            trunfoIsChecked={ filterTrunfoIsChecked }
           />
           {savedCards}
         </div>
